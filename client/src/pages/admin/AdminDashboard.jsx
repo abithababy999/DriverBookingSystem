@@ -1,16 +1,20 @@
+import BackButton from "../../components/common/BackButton";
+
 const stats = [
-  { label: "Total Bookings", value: "128" },
-  { label: "Active Drivers", value: "12" },
+  { label: "Total Bookings", value: 128 },
+  { label: "Active Drivers", value: 12 },
   { label: "Revenue", value: "₹84,500" },
-  { label: "Pending Jobs", value: "7" },
+  { label: "Pending Jobs", value: 7 },
 ];
 
 function AdminDashboard() {
   return (
     <div style={{ padding: "32px", fontFamily: "Arial, sans-serif" }}>
+      <BackButton />
       <h1>Admin Dashboard</h1>
+      <p>Local operations dashboard for Mukkom / Kozhikode services</p>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "16px" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "16px", marginTop: "20px" }}>
         {stats.map((item) => (
           <div
             key={item.label}
@@ -22,7 +26,7 @@ function AdminDashboard() {
             }}
           >
             <p>{item.label}</p>
-            <h2>{item.value}</h2>
+            <h2>{typeof item.value === "number" ? item.value : item.value}</h2>
           </div>
         ))}
       </div>

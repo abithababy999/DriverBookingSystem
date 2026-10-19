@@ -1,3 +1,5 @@
+import BackButton from "../../components/common/BackButton";
+
 const bookings = [
   { id: 1, customer: "Rahul", destination: "Kozhikode", status: "Assigned" },
   { id: 2, customer: "Anu", destination: "Mukkom", status: "Completed" },
@@ -7,6 +9,7 @@ const bookings = [
 function MyBookings() {
   return (
     <div style={{ padding: "32px", fontFamily: "Arial, sans-serif" }}>
+      <BackButton />
       <h1>My Bookings</h1>
       <table style={{ width: "100%", borderCollapse: "collapse" }}>
         <thead>

@@ -1,12 +1,15 @@
 import { useState } from "react";
+import BackButton from "../../components/common/BackButton";
+
+const availableServices = ["Driver", "Plumber", "Electrician", "Cleaner"];
 
 function BookService() {
   const [form, setForm] = useState({
-    customerName: "",
-    phone: "",
-    pickup: "",
-    destination: "",
-    date: "",
+    customerName: "Rahul",
+    phone: "+91 98765 12345",
+    pickup: "Mukkom",
+    destination: "Kozhikode",
+    date: "2026-10-20",
     service: "Driver",
   });
 
@@ -17,62 +20,40 @@ function BookService() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`Booking request created for ${form.customerName}`);
+
+    const estimatedFare = 450;
+    alert(
+      `Booking created for ${form.customerName}. Estimated fare: ₹${estimatedFare}. ` +
+        `Pickup: ${form.pickup} to ${form.destination}. Service: ${form.service}`
+    );
   };
 
   return (
     <div style={{ maxWidth: "600px", margin: "40px auto", fontFamily: "Arial, sans-serif" }}>
-      <h1>Book a Driver</h1>
+      <BackButton />
+      <h1>Book a Service</h1>
+      <p>Local service booking for Mukkom / Kozhikode area</p>
 
       <form onSubmit={handleSubmit} style={{ display: "grid", gap: "14px" }}>
-        <input
-          name="customerName"
-          value={form.customerName}
-          onChange={handleChange}
-          placeholder="Customer Name"
-          style={inputStyle}
-        />
-
-        <input
-          name="phone"
-          value={form.phone}
-          onChange={handleChange}
-          placeholder="Phone Number"
-          style={inputStyle}
-        />
-
-        <input
-          name="pickup"
-          value={form.pickup}
-          onChange={handleChange}
-          placeholder="Pickup Location"
-          style={inputStyle}
-        />
-
-        <input
-          name="destination"
-          value={form.destination}
-          onChange={handleChange}
-          placeholder="Destination"
-          style={inputStyle}
-        />
-
-        <input
-          type="date"
-          name="date"
-          value={form.date}
-          onChange={handleChange}
-          style={inputStyle}
-        />
+        <input name="customerName" value={form.customerName} onChange={handleChange} placeholder="Customer Name" style={inputStyle} />
+        <input name="phone" value={form.phone} onChange={handleChange} placeholder="Phone Number" style={inputStyle} />
+        <input name="pickup" value={form.pickup} onChange={handleChange} placeholder="Pickup Location" style={inputStyle} />
+        <input name="destination" value={form.destination} onChange={handleChange} placeholder="Destination" style={inputStyle} />
+        <input type="date" name="date" value={form.date} onChange={handleChange} style={inputStyle} />
 
         <select name="service" value={form.service} onChange={handleChange} style={inputStyle}>
-          <option value="Driver">Driver</option>
-          <option value="Plumber">Plumber</option>
-          <option value="Electrician">Electrician</option>
-          <option value="Cleaner">Cleaner</option>
+          {availableServices.map((service) => (
+            <option key={service} value={service}>
+              {service}
+            </option>
+          ))}
         </select>
 
-        <button type="submit" style={buttonStyle}>Book Now</button>
+        <div style={{ background: "#f3f4f6", padding: "12px 16px", borderRadius: "8px" }}>
+          Estimated charge: <strong>₹450</strong>
+        </div>
+
+        <button type="submit" style={buttonStyle}>Confirm Booking</button>
       </form>
     </div>
   );
