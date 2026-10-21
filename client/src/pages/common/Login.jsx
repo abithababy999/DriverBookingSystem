@@ -6,7 +6,7 @@ seedUsers();
 
 function Login() {
   const navigate = useNavigate();
-  const [form, setForm] = useState({ email: "admin@driverbooking.com", password: "admin123" });
+  const [form, setForm] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
@@ -17,11 +17,11 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
-      const user = loginUser(form.email, form.password);
+      const user = loginUser(form.username, form.password);
 
       if (user.role === "admin") navigate("/admin");
       else if (user.role === "worker") navigate("/worker");
-      else navigate("/");
+      else navigate("/home");
     } catch (err) {
       setError(err.message);
     }
@@ -31,20 +31,15 @@ function Login() {
     <div style={{ maxWidth: "420px", margin: "60px auto", padding: "24px", fontFamily: "Arial, sans-serif" }}>
       <h1>Login</h1>
 
-      <div style={{ marginBottom: "16px", color: "#374151" }}>
-        <p><strong>Admin:</strong> admin@driverbooking.com / admin123</p>
-        <p><strong>Worker / User:</strong> must be registered from the register page</p>
-      </div>
-
       {error && <p style={{ color: "red" }}>{error}</p>}
 
       <form onSubmit={handleSubmit} style={{ display: "grid", gap: "14px" }}>
         <input
-          type="email"
-          name="email"
-          value={form.email}
+          type="text"
+          name="username"
+          value={form.username}
           onChange={handleChange}
-          placeholder="Email"
+          placeholder="Username or Email"
           style={inputStyle}
         />
 
@@ -59,6 +54,10 @@ function Login() {
 
         <button type="submit" style={buttonStyle}>Login</button>
       </form>
+
+      <p style={{ marginTop: "16px" }}>
+        <Link to="/forgot-password">Forgot password?</Link>
+      </p>
 
       <p style={{ marginTop: "16px" }}>
         New user? <Link to="/register">Register here</Link>

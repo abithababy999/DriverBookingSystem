@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Login from "./pages/common/Login";
 import Register from "./pages/common/Register";
+import ForgotPassword from "./pages/common/ForgotPassword";
 import Home from "./pages/customer/Home";
 import BookService from "./pages/customer/BookService";
 import MyBookings from "./pages/customer/MyBookings";
@@ -19,11 +20,13 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
 
         <Route
-          path="/"
+          path="/home"
           element={
             <ProtectedRoute allowedRoles={['user', 'admin', 'worker']}>
               <Home />
